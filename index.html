@@ -19,7 +19,8 @@
     -->
 
     <!-- Don't delete this. It's needed for development workflow. -->
-    <link rel="stylesheet" href="stylesheets/bundle.min.css">
+    <!-- inject:css -->
+    <!-- endinject -->
 </head>
 
 <body>
@@ -27,7 +28,7 @@
     <img src="images/loading.svg">
 </div> -->
 
-<div class="swiper-container">
+<div class="swiper-container swiper-father">
     <div class="swiper-wrapper">
         <div class="swiper-slide slide-1">
             <div class="slide-1-head"></div>
@@ -37,13 +38,17 @@
                 <li class="animated" data-ani-name="slideInRight" data-ani-duration="1.3s" data-ani-delay="0.3s">工作经验： 3年</li>
                 <li class="animated" data-ani-name="slideInRight" data-ani-duration="1.4s" data-ani-delay="0.3s">原公司： 上海云统信息科技有限公司</li>
                 <li class="animated" data-ani-name="slideInRight" data-ani-duration="1.5s" data-ani-delay="0.3s">职位：前端工程师</li>
-                <li class="animated" data-ani-name="slideInRight" data-ani-duration="1.6s" data-ani-delay="0.3s">毕业院校： 安阳工学院 本科</li>
-                <li class="animated" data-ani-name="slideInRight" data-ani-duration="1.7s" data-ani-delay="0.3s">所学专业：自动化</li>
+                <li class="animated" data-ani-name="slideInRight" data-ani-duration="1.6s" data-ani-delay="0.3s">毕业院校：本科|安阳工学院|电子信息学院|自动化</li>
+                <li class="animated" data-ani-name="slideInRight" data-ani-duration="1.6s" data-ani-delay="0.3s">期望薪资：税前月薪12k~15k，特别喜欢的公司可例外</li>
+                <li class="animated" data-ani-name="slideInRight" data-ani-duration="1.6s" data-ani-delay="0.3s">期望城市：成都</li>
+                <li class="animated" data-ani-name="slideInRight" data-ani-duration="1.7s" data-ani-delay="0.3s">手机：13917278119</li>
+                <li class="animated" data-ani-name="slideInRight" data-ani-duration="1.8s" data-ani-delay="0.3s">Email：13917278119@163.com</a></li>
+                <li class="animated" data-ani-name="slideInRight" data-ani-duration="1.9s" data-ani-delay="0.3s">微信号：zq1291342008</a></li>
                 <div class="coverLayer">
                     <div class="cover"></div>
                 </div>
             </ul>
-            <p class="item-text animated" data-ani-name="slideInRight" data-ani-duration="1s" data-ani-delay="0.3s"><span>为了得到贵公司的工作，面试就应该对待工作一样，
+            <p class="item-text animated" data-ani-name="pulse" data-ani-duration="1s" data-ani-delay="0.3s"><span>为了得到贵公司的工作，面试就应该对待工作一样，
             所以我精心准备此次面试，你准备好了解我了吗...</span>
             </p>
         </div>
@@ -54,20 +59,166 @@
                 </div>
             </div>
             <ul class="slide-2-list">
-                <li class="animated" data-ani-name="slideInRight" data-ani-duration="1s" data-ani-delay="0.3s">姓名：宗强</li>
+                <ul class="my-skills">
+                    <li class="animated" data-ani-name="slideInRight" data-ani-duration="1s" data-ani-delay="0.3s"><b>编程语言：</b>javascript(含ES6)/nodeJs</li>
+                    <li class="animated" data-ani-name="slideInRight" data-ani-duration="1s" data-ani-delay="0.3s"><b>前端框架/库：</b>VueJs/AngularJS/underscoreJs/RequireJs</li>
+                    <li class="animated" data-ani-name="slideInRight" data-ani-duration="1s" data-ani-delay="0.3s"><b>前端UI库：</b>ElementUI/Ionic/bootstrap/amazeUI/AnimateCss/...</li>
+                    <li class="animated" data-ani-name="slideInRight" data-ani-duration="1s" data-ani-delay="0.3s"><b>开发流程/部署：</b>Bower/Gulp/Grunt/Yeoman/webpack/Nginx/Sass/Less</li>
+                    <li class="animated" data-ani-name="slideInRight" data-ani-duration="1s" data-ani-delay="0.3s"><b>web性能：</b>Yslow 35 rules</li>
+                    <li class="animated" data-ani-name="slideInRight" data-ani-duration="1s" data-ani-delay="0.3s"><b>版本管理：</b>Svn/Git</li>
+                    <li class="animated" data-ani-name="slideInRight" data-ani-duration="1s" data-ani-delay="0.3s"><b>单元测试/自动化测试：</b>Jasmine/karma</li>
+                    <li class="animated" data-ani-name="slideInRight" data-ani-duration="1s" data-ani-delay="0.3s"><b>浏览器兼容/调试：</b>(兼容)IE6/7/8/9/10/11  Firefox/Chrome/Safari/... (调试)firebug/firebug-lite/chrome控制台/IE tester/Yslow/fiddler...</a></li>
+                    <li class="animated" data-ani-name="slideInRight" data-ani-duration="1s" data-ani-delay="0.3s"><b>代码质量：</b>eslint/jslint</a></li>
+                    <li class="animated" data-ani-name="slideInRight" data-ani-duration="1s" data-ani-delay="0.3s"><b>前端标准/规范：</b>W3C/DOM/BOM/JSON/HTML5/CSS3/ECMAScript/CommonJs规范/AMD规范</a></li>
+                    <li class="animated" data-ani-name="slideInRight" data-ani-duration="1s" data-ani-delay="0.3s"><b>开放平台：</b>了解微信小程序开发</a></li>
+                </ul>
+                <!-- <p class="skill-remark animated" data-ani-name="zoomIn" data-ani-duration="1s" data-ani-delay="0.3s"><span>备注：前端技术更新速度快且庞大，每一家公司具体业务和项目不尽相同，目前我所掌握的技术可能没有全面涉及和符合贵公司具体业务，不过没有关系，我愿意接受挑战，听从领导安排，上班开发下班学习，尽量不耽误公司正常的项目开发周期</span></p> -->
             </ul>
             <div class="animated slide-2-foot" data-ani-name="flipInY" data-ani-duration="1.5s" data-ani-delay="0s" class=""><span>2019@code by 宗强</span></div>
         </div>
         <div class="swiper-slide slide-3">
-                <div class="slide-3-head">
-                    <div class="slide-3-head-content">
-                        <p class="animated" data-ani-name="swing" data-ani-duration="1s" data-ani-delay="0.3s">我嘞<br>&nbsp;&nbsp;看家本领</p>
+            <div class="slide-3-head">
+                <div class="slide-3-head-content">
+                    <p class="animated" data-ani-name="swing" data-ani-duration="1s" data-ani-delay="0.3s">我嘞<br>&nbsp;&nbsp;项目经历</p>
+                </div>
+            </div>
+            <ul class="slide-3-list">
+                <h4>“上海砂石协会”废弃混凝土综合管理平台</h4>
+                <p><span>项目地址1：</span><a href="javascript:;">http://c.shwaste.unitoon.cn</a>(申报)</p>
+                <p><span>项目地址2：</span><a href="javascript:;">http://m.shwaste.unitoon.cn</a>(管理)</p>
+                <div class="swiper-container swiper-image">
+                    <div class="swiper-wrapper">
+                      <div class="swiper-slide"><img src="./images/c_shwaste_login.png" alt=""></div>
+                      <div class="swiper-slide"><img src="./images/c_shwaste_detail1.png" alt=""></div>
+                      <div class="swiper-slide"><img src="./images/c_shwaste_detail2.png" alt=""></div>
+                      <div class="swiper-slide"><img src="./images/c_shwaste_detail3.png" alt=""></div>
+                      <div class="swiper-slide"><img src="./images/m_shwaste_login.png" alt=""></div>
+                      <div class="swiper-slide"><img src="./images/m_shwaste_detail1.png" alt=""></div>
+                      <div class="swiper-slide"><img src="./images/m_shwaste_detail2.png" alt=""></div>
+                    </div>
+                    <div class="swiper-pagination">
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
                     </div>
                 </div>
-                <ul class="slide-3-list">
-                    <li class="animated" data-ani-name="slideInRight" data-ani-duration="1s" data-ani-delay="0.3s">姓名：宗强</li>
+                <p><b>所用技术：</b><span>vue + vuex + vue-router + axios + element-ui + ES6 + Mock.js + webpack</span></p>
+            </ul>
+            <div class="animated slide-3-foot" data-ani-name="flipInY" data-ani-duration="1.5s" data-ani-delay="0s" class=""><span>2019@code by 宗强</span></div>
+        </div>
+        <div class="swiper-slide slide-4">
+            <div class="slide-4-head">
+                <div class="slide-4-head-content">
+                    <p class="animated" data-ani-name="swing" data-ani-duration="1s" data-ani-delay="0.3s">我嘞<br>&nbsp;&nbsp;项目经历</p>
+                </div>
+            </div>
+            <ul class="slide-4-list">
+                    <h4>"乌东徳"水电站砂石加工项目生产系统</h4>
+                    <p><span>项目地址：</span><a href="javascript:;">http://wdddata.unitoon.cn</a></p>
+                    <div class="swiper-container swiper-image4">
+                        <div class="swiper-wrapper">
+                          <div class="swiper-slide"><img src="./images/wdd_0.png" alt=""></div>
+                          <div class="swiper-slide"><img src="./images/wdd_1.png" alt=""></div>
+                          <div class="swiper-slide"><img src="./images/wdd_2.png" alt=""></div>
+                          <div class="swiper-slide"><img src="./images/wdd_3.png" alt=""></div>
+                          <div class="swiper-slide"><img src="./images/wdd_4.png" alt=""></div>
+                        </div>
+                        <div class="swiper-pagination">
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                        </div>
+                    </div>
+                    <p><b>所用技术：</b><span>vue + vuex + vue-router + axios + element-ui + ES6 + echart.js + highChart.js + jQuery + webpack</span></p>
+            </ul>
+            <div class="animated slide-4-foot" data-ani-name="flipInY" data-ani-duration="1.5s" data-ani-delay="0s" class=""><span>2019@code by 宗强</span></div>
+        </div>
+        <div class="swiper-slide slide-5">
+                <div class="slide-5-head">
+                    <div class="slide-5-head-content">
+                        <p class="animated" data-ani-name="swing" data-ani-duration="1s" data-ani-delay="0.3s">我嘞<br>&nbsp;&nbsp;项目经历</p>
+                    </div>
+                </div>
+                <ul class="slide-5-list">
+                        <h4>"重庆涪陵"大业建材300t/h骨料产线监测</h4>
+                        <p><span>项目地址：</span><a href="javascript:;">http://cqled.unitoon.cn</a></p>
+                        <div class="swiper-container swiper-image5">
+                            <div class="swiper-wrapper">
+                              <div class="swiper-slide"><img src="./images/cqdy.jpeg" alt=""></div>
+                            </div>
+                            <div class="swiper-pagination">
+                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-button-next"></div>
+                            </div>
+                        </div>
+                        <p><b>所用技术：</b><span>vue + ajax + ES6 + echart.js + webpack + CSS3</span></p>
                 </ul>
-                <div class="animated slide-3-foot" data-ani-name="flipInY" data-ani-duration="1.5s" data-ani-delay="0s" class=""><span>2019@code by 宗强</span></div>
+                <div class="animated slide-5-foot" data-ani-name="flipInY" data-ani-duration="1.5s" data-ani-delay="0s" class=""><span>2019@code by 宗强</span></div>
+            </div>
+            <div class="swiper-slide slide-6">
+                <div class="slide-6-head">
+                    <div class="slide-6-head-content">
+                        <p class="animated" data-ani-name="swing" data-ani-duration="1s" data-ani-delay="0.3s">我嘞<br>&nbsp;&nbsp;项目经历</p>
+                    </div>
+                </div>
+                <ul class="slide-6-list">
+                        <h4>“云统机智”物联网云数据服务平台</h4>
+                        <p><span>项目地址：</span><a href="javascript:;">http://datacenter.unitoon.cn</a></p>
+                        <div class="swiper-container swiper-image6">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide"><img src="./images/datacenter_0.png" alt=""></div>
+                                <div class="swiper-slide"><img src="./images/datacenter_1.png" alt=""></div>
+                                <div class="swiper-slide"><img src="./images/datacenter_3.png" alt=""></div>
+                                <div class="swiper-slide"><img src="./images/datacenter_4.png" alt=""></div>
+                                <div class="swiper-slide"><img src="./images/datacenter_5.png" alt=""></div>
+                            </div>
+                            <div class="swiper-pagination">
+                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-button-next"></div>
+                            </div>
+                        </div>
+                        <p><b>所用技术：</b><span>AngularJs + Grunt + Sass + bootstrap.js + ajax</span></p>
+                </ul>
+                <div class="animated slide-6-foot" data-ani-name="flipInY" data-ani-duration="1.5s" data-ani-delay="0s" class=""><span>2019@code by 宗强</span></div>
+            </div>
+            <div class="swiper-slide slide-7">
+                <div class="slide-7-head">
+                    <div class="slide-7-head-content">
+                        <p class="animated" data-ani-name="swing" data-ani-duration="1s" data-ani-delay="0.3s">其它<br>&nbsp;&nbsp;工作分配</p>
+                    </div>
+                </div>
+                <ul class="slide-7-list">
+                        <h4>在公司的其他工作</h4>
+                        <div class="swiper-container swiper-image7">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide"><img src="./images/word_1.png" alt=""></div>
+                                <div class="swiper-slide"><img src="./images/word_2.png" alt=""></div>
+                                <div class="swiper-slide"><img src="./images/product_1.jpeg" alt=""></div>
+                                <div class="swiper-slide"><img src="./images/word_2.jpeg" alt=""></div>
+                                <div class="swiper-slide"><img src="./images/word_3.jpeg" alt=""></div>
+                            </div>
+                            <div class="swiper-pagination">
+                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-button-next"></div>
+                            </div>
+                        </div>
+                        <p><b>工作内容介绍:</b><span>编写文档/维护迷你产线/参加展会/...</span></p>
+                </ul>
+                <div class="animated slide-7-foot" data-ani-name="flipInY" data-ani-duration="1.5s" data-ani-delay="0s" class=""><span>2019@code by 宗强</span></div>
+            </div>
+            <div class="swiper-slide slide-8">
+                <div class="slide-8-head">
+                    <div class="slide-8-head-content">
+                        <p class="animated" data-ani-name="swing" data-ani-duration="1s" data-ani-delay="0.3s">我的<br>&nbsp;&nbsp;自我评价</p>
+                    </div>
+                </div>
+                <ul class="slide-8-list">
+                    <ul class="my-skills">
+                        <li class="animated" data-ani-name="slideInRight" data-ani-duration="1s" data-ani-delay="0.3s"><b>1.</b>工作认真负责，多年来，始终是公司早上第一个来，晚上最后一个走（注：这事儿只有老板和主管知道，不能因为自己这样而影响其他同事）</li>
+                        <li class="animated" data-ani-name="slideInRight" data-ani-duration="1s" data-ani-delay="0.3s"><b>2.</b>抗压能力强，服从领导安排，曾连续加班一个多月，有时项目赶得紧，拿着电脑在家加班到半夜也是常事儿</li>
+                        <li class="animated" data-ani-name="slideInRight" data-ani-duration="1s" data-ani-delay="0.3s"><b>3.</b>团队意识强，服从安排，不依技术高低待人，一个团队技术能力可能层次不齐，只要能把项目干好，就是最好的团队</li>
+                        <li class="animated" data-ani-name="slideInRight" data-ani-duration="1s" data-ani-delay="0.3s"><b>4.</b>我个人技术有限，但不排斥学习新技术，会虚心向同事请教，也会主动更新自己的知识体系</li>
+                    </ul>
+                </ul>
+                <div class="animated slide-8-foot" data-ani-name="flipInY" data-ani-duration="1.5s" data-ani-delay="0s" class=""><span>2019@code by 宗强</span></div>
             </div>
     </div>
 </div>
@@ -76,16 +227,17 @@
     <i class="icon-angle-double-up"></i>
 </button>
 
-<!-- <button class="btn-music">
+<button class="btn-music" style="display:none;">
     <i class="icon-note"></i>
-</button> -->
+</button>
 
-<!-- <audio loop>
-    <source src="audios/background.mp3" type="audio/mpeg">
-</audio> -->
+<audio loop>
+    <source src="" type="audio/mpeg">
+</audio>
 
 <!-- Don't delete this. It's needed for development workflow. -->
-<script src="javascripts/bundle.min.js"></script>
+<!-- inject:js -->
+<!-- endinject -->
 
 </body>
 

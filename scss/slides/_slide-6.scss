@@ -1,0 +1,60 @@
+.slide-6 {
+  background-color: rgb(100, 182, 195);
+  position: relative;
+  .slide-6-head {
+      height: 100px;
+      position: absolute;
+      top: 0;
+      background: red;
+      width: 100%;
+      background: url('../images/title.png') no-repeat;
+      background-size: contain;
+      background-position-y: -20px;
+      .slide-6-head-content{
+          width: 100%;
+          height: 100%;
+          position: relative;
+          p {
+              color: rgb(100, 182, 195);
+              line-height: 24px;
+              position: absolute;
+              margin: 0;
+              left: 20px;
+              top: 15px;
+              font-weight: 800;
+              font-size: 18px;
+          }
+      }
+  }
+  .slide-6-list {
+      position: absolute;
+      top: 100px;
+      bottom: 50px;
+      overflow: hidden;
+      width: 100%;
+      margin: 0;
+      padding: 10px;
+      list-style: none;
+      .swiper-image6 {
+        height: 220px;
+        margin-bottom: 30px;
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+  }
+  .slide-6-foot {
+      height: 40px;
+      position: absolute;
+      bottom: 0;
+      background: rgb(250, 249, 218);
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 14px;
+      color: rgb(100, 182, 195);
+      border-radius: 10px 10px 0 0;
+  }
+}
