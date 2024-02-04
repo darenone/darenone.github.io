@@ -1,6 +1,24 @@
-# 技术点demo
+# zongqiang-blog
 
-## 说明
+## Project setup
+```
+npm install
+```
 
-介绍各种前端插件/库的使用
+### Compiles and hot-reloads for development
+```
+npm run dev
+```
 
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
