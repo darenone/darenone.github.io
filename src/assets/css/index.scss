@@ -1,0 +1,626 @@
+@import './common';
+@import './element-ui';
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+}
+
+html,
+body,
+#app,
+.wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+a {
+  text-decoration: none;
+}
+
+/*滚动条样式美化*/
+/*滚动条整体部分，其中的属性有width,height,background,border（就和一个块级元素一样）等。*/
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+/*外层轨道。可以用display:none让其不显示，也可以添加背景图片，颜色改变显示效果。*/
+::-webkit-scrollbar-track {
+  background-color: rgba(153, 153, 153, 0.1);
+  border-radius: 6px;
+}
+
+/*滚动条里面可以拖动的那部分*/
+::-webkit-scrollbar-thumb {
+  background-color: rgba(153, 153, 153, 0.3);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(153, 153, 153, 0.6);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: rgba(153, 153, 153, 0.9);
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(153, 153, 153, 0.3) rgba(153, 153, 153, 0.1);
+}
+
+/* 自定义样式调整 */
+
+.el-table th {
+  color: black;
+  background-color: #fafafa;
+}
+.el-table th.operate-cell .cell{
+  width: auto;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.el-table td,
+.el-table th {
+  padding: 8px 0;
+}
+
+.el-dialog {
+  margin: auto;
+}
+.el-dialog__header{
+  padding-bottom: 30px;
+}
+.el-dialog .el-table .el-form-item--mini.el-form-item,
+.el-dialog .el-table .el-form-item--small.el-form-item{
+  margin-bottom: 0;
+}
+.el-dialog__body {
+  box-sizing: border-box;
+  padding: 10px 20px 0 20px !important;
+  max-height: calc(70vh - 100px);
+  overflow: auto;
+}
+
+.el-table th.el-table__cell {
+  background-color: #fafafa;
+}
+
+.el-select {
+  display: block;
+}
+
+.tree-option {
+  height: 200px;
+  overflow: auto;
+  background-color: white !important;
+  padding: 0;
+  font-weight: normal !important;
+}
+
+.el-form-item__content > .el-input {
+  width: 100%;
+}
+
+.el-form-item__content > .el-input-number {
+  width: 100%;
+}
+
+.el-cascader__tags .el-tag {
+  max-width: calc(100% - 60px);
+}
+
+.el-form-item .el-table {
+  line-height: normal;
+}
+
+/* vue-treeselect 样式 */
+.el-main {
+  .vue-treeselect__multi-value-item {
+    font-size: 14px;
+  }
+
+  .vue-treeselect__control {
+    height: 40px;
+    border: 1px solid #dcdfe6;
+    border-radius: 4px;
+    display: block;
+  }
+
+  .vue-treeselect__value-remove {
+    height: 19px;
+    line-height: 1.1;
+  }
+
+  .vue-treeselect__placeholder {
+    line-height: 38px;
+  }
+
+  .vue-treeselect__single-value {
+    line-height: 38px;
+    color: #606266;
+  }
+
+  .vue-treeselect__limit-tip {
+    height: 30px;
+    line-height: 22px;
+  }
+
+  .vue-treeselect span {
+    max-width: 49px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+.vue-treeselect__option--disabled .vue-treeselect__label-container {
+  color: #a1a1a1;
+}
+
+/* vue-treeselect  mini样式 */
+.size-mini {
+  .vue-treeselect__control {
+      height: 28px !important;
+      min-height: 28px !important;
+      line-height: 28px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+    }
+
+    .vue-treeselect__value-container,
+    .vue-treeselect__multi-value-item,
+    .vue-treeselect__limit-tip,
+    .vue-treeselect__placeholder {
+      height: 22px !important;
+      min-height: 22px !important;
+      line-height: 22px;
+      font-size: 12px;
+    }
+
+  .vue-treeselect__single-value {
+    font-size: 12px;
+    line-height: 26px;
+  }
+
+  .vue-treeselect__label-container {
+    font-size: 14px;
+  }
+
+  .vue-treeselect__multi-value-item {
+    padding: 0;
+    border: 0;
+    font-size: 12px;
+  }
+
+  // .vue-treeselect__limit-tip {
+  //   height: 22px;
+  //   line-height: 1.2;
+  // }
+
+  .vue-treeselect--has-value .vue-treeselect__multi-value {
+    margin-bottom: 1px;
+  }
+
+  .vue-treeselect__multi-value-item-container,
+  .vue-treeselect__limit-tip {
+    padding-top: 0px;
+  }
+}
+
+.vue-treeselect__portal-target {
+  z-index: 9999 !important;
+}
+
+.title-label {
+  display: inline-block;
+  padding-right: 12px;
+  line-height: 30px;
+  text-align: right;
+  box-sizing: border-box;
+}
+
+.fr {
+  float: right;
+}
+
+.fl {
+  float: left;
+}
+
+// 网段通道端口状态颜色样式
+.port-status-list {
+  padding: 3px 10px;
+  font-size: 12px;
+  border-radius: 3px;
+  border: 1px solid transparent;
+}
+
+.segment-list-box {
+  .color-idle {
+    color: #fff;
+    &.port-status-list,
+    &.topo-port {
+      background-color: #0a5bd6;
+    }
+  }
+
+  .color-conn {
+    color: #fff;
+    &.port-status-list,
+    &.topo-port {
+      background-color: #58bbf3;
+    }
+    span,
+    div {
+      // font-weight: 800;
+      color: #fff;
+    }
+  }
+
+  .color-main {
+    color: #fff;
+    &.port-status-list,
+    &.topo-port {
+      background-color: #a9d138;
+    }
+    span,
+    div {
+      // font-weight: 800;
+      color: #a9d138;
+    }
+  }
+
+  .color-backup {
+    color: #fff;
+    &.port-status-list,
+    &.topo-port {
+      background-color: #13a78c;
+    }
+    span,
+    div {
+      // font-weight: 800;
+      color: #13a78c;
+    }
+  }
+
+  .color-occupy {
+    color: #fff;
+    &.port-status-list,
+    &.topo-port {
+      background-color: #ffb450;
+    }
+    span,
+    div {
+      // font-weight: 800;
+      color: #ffb450;
+    }
+  }
+
+  .color-damage {
+    color: #fff;
+    &.port-status-list,
+    &.topo-port {
+      background-color: #e13c26;
+    }
+    span,
+    div {
+      // font-weight: 800;
+      color: #e13c26;
+    }
+  }
+
+  .color-process {
+    color: #fff;
+    &.port-status-list,
+    &.topo-port {
+      background-color: #a464f6;
+    }
+    span,
+    div {
+      // font-weight: 800;
+      color: #a464f6;
+    }
+  }
+  .color-lock {
+    color: #fff;
+    &.port-status-list,
+    &.topo-port {
+      background-color: #cbcbcb;
+    }
+  }
+  .color-select {
+    color: #fff;
+    &.port-status-list,
+    &.topo-port {
+      background-color: #87f8ff;
+    }
+  }
+
+  .hover-row {
+    .color-conn {
+      color: #00aeff;
+    }
+
+    .color-main {
+      color: #339933;
+    }
+
+    .color-backup {
+      color: #016a6f;
+    }
+
+    .color-occupy {
+      color: #ffcc33;
+    }
+
+    .color-damage {
+      color: #cc3333;
+    }
+
+    .color-process {
+      color: #ff7f00;
+    }
+    .color-lock {
+      color: #bbbbbb;
+    }
+  }
+}
+
+// 链路割接页面样式
+.page-cutover {
+  .port-item {
+    min-width: 100px;
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+
+    & > span {
+      width: 10px;
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    & > label {
+      width: 30px;
+    }
+
+    &.fr > label {
+      text-align: right;
+    }
+
+    &.fl > label {
+      text-align: left;
+    }
+
+    .port-circle {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      background: #f5f5f5;
+      border: 1px solid #eee;
+      border-radius: 50%;
+      box-sizing: border-box;
+      cursor: pointer;
+
+      &.active {
+        box-shadow: 0px 0px 5px 1px #67c23a;
+      }
+    }
+  }
+}
+
+.tabs-nav .el-tabs__header {
+  margin: 0;
+  height: 40px;
+}
+
+.no-padding-table {
+  &.el-table--mini .el-table__cell {
+    padding: 0;
+  }
+}
+
+.test-progress {
+  margin-left: 10px;
+  font-size: 12px;
+}
+
+.el-table .is-left .cell {
+  text-align: left;
+}
+
+.el-table .is-right .cell {
+  text-align: right;
+}
+
+.el-table .cell {
+  text-align: center;
+}
+
+.el-loading-mask {
+  background: transparent;
+}
+
+.el-submenu__title i {
+  color: #ccc;
+}
+
+.vue-treeselect--disabled {
+  cursor: not-allowed;
+}
+
+.el-table th.el-table__cell {
+  user-select: text;
+}
+
+.el-table th.el-table__cell > .cell {
+  white-space: nowrap;
+  overflow: hidden;
+}
+.el-table .el-table__cell {
+  overflow: hidden;
+}
+.iconfont.icon-AFSwenhao {
+  font-size: 15px;
+}
+
+.el-table__empty-text {
+  font-size: 14px;
+}
+
+.el-button + .el-button.el-button--text::before {
+  content: '|';
+  margin-right: 6px;
+  opacity: 0.3;
+}
+.el-button + .el-button.el-button--text {
+  margin-left: 5px;
+}
+
+.topo-change-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 7px 15px;
+  height: 28px;
+  font-size: 14px;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  &.topo-deactive {
+  }
+}
+
+.help-box .el-form-item--mini {
+  position: relative;
+}
+.help-box .el-form-item--mini .el-form-item__content {
+  padding-right: 25px;
+}
+.form-tips {
+  position: absolute;
+  right: 5px;
+  top: 0;
+}
+
+.flex-dialog .el-dialog__body {
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
+}
+
+.el-tag--info {
+  max-width: 50% !important;
+}
+// 菜单自定义样式
+.el-menu--horizontal div > .el-submenu .el-submenu__title,
+.el-menu--horizontal > .el-submenu .el-submenu__title {
+  height: 60px;
+  line-height: 60px;
+  border-bottom-width: 4px !important;
+}
+.el-dropdown-menu__item,
+.el-menu-item {
+  font-size: 14px;
+}
+.el-menu--horizontal .el-menu .el-menu-item,
+.el-menu--horizontal .el-menu .el-submenu__title{
+  height: 60px;
+  line-height: 60px;
+}
+
+// 端口样式card
+.el-tabs--border-card{
+  border:0;
+  box-shadow: none;
+}
+.el-tabs--border-card>.el-tabs__content{
+  padding-left: 0;
+  padding-right: 0;
+}
+
+// 字体大小修改后适配样式开始
+.el-dialog__body,
+.el-radio-button--mini .el-radio-button__inner,
+.el-tree-node__label,
+.vue-treeselect__limit-tip .vue-treeselect__limit-tip-text,
+.el-cascader-node__label,
+.el-dropdown-link.el-dropdown-selfdefine,
+.el-range-editor--mini .el-range-input,
+.el-textarea__inner,
+.el-tag,
+.el-divider__text {
+  font-size: 12px;
+}
+
+.el-dropdown-menu__item,
+.el-menu-item,
+.el-submenu__title,
+.el-select-dropdown__item ,
+.el-dialog__title{
+  font-size: 14px;
+}
+
+.el-select-dropdown__item {
+  height: 34px;
+  line-height: 34px;
+}
+
+.el-menu--horizontal .el-menu .el-menu-item,
+.el-menu--horizontal .el-menu .el-submenu__title {
+  height: 36px;
+  line-height: 36px;
+}
+
+.el-input--mini .el-input__inner,
+.el-form-item__label,
+.el-message-box__message,
+.el-checkbox__label,
+.el-range-editor--mini.el-input__inner {
+  height: 28px !important;
+  min-height: 28px !important;
+  line-height: 28px !important;
+  font-size: 12px;
+}
+
+.filter-station .el-form-item__label {
+  height: auto !important;
+}
+
+.el-input-number--mini .el-input-number__decrease,
+.el-input-number--mini .el-input-number__increase {
+  height: 26px !important;
+  min-height: 26px !important;
+  line-height: 26px !important;
+  font-size: 12px;
+}
+
+.alarmConfigVoice .el-input-number--mini .el-input-number__decrease,
+.alarmConfigVoice .el-input-number--mini .el-input-number__increase {
+  height: 13px !important;
+  min-height: 13px !important;
+  line-height: 13px !important;
+  font-size: 12px;
+}
+
+.el-table .cell.el-tooltip {
+  white-space: inherit;
+}
+
+// 分页大小不能和上面写在一起，因为这个不受字体大小影响
+.el-pagination button,
+.el-pagination span:not([class*=suffix]),
+.el-pagination .el-input--mini .el-input__inner,
+.flange-port .el-input--mini .el-input__inner {
+  height: 28px !important;
+  min-height: 28px !important;
+  line-height: 28px !important;
+  font-size: 12px;
+}
