@@ -1,14 +1,11 @@
 <template>
-  <section class="flex el-menu-wrapper w-100 h-100">
+  <section class="flex justify-end w-100 h-100">
     <slot />
     <el-menu
       router
       :mode="mode"
       :collapse="collapsed"
       :collapse-transition="false"
-      background-color="#fff"
-      text-color="#ccc"
-      active-text-color="#000"
       :default-active="$route.path"
     >
       <template v-for="(item) in navList">

@@ -21,11 +21,12 @@ const routes = [
     redirect: '/home',
     children: [
       {
-        path: 'home',
+        path: '/home',
         name: 'home', // 首页（一级路由）
         component: () => import('@/views/home/'),
         meta: {
-          title: '首页'
+          title: '首页',
+          icon: 'el-icon-s-home'
         }
       },
       {
@@ -33,7 +34,8 @@ const routes = [
         name: 'antvG6',
         component: () => import('@/views/antv-g6/'),
         meta: {
-          title: '关系图-G6'
+          title: '关系图-G6',
+          icon: 'el-icon-s-grid'
         }
       },
       {
@@ -41,7 +43,8 @@ const routes = [
         name: 'vis',
         component: () => import('@/views/vis/'),
         meta: {
-          title: '拓扑图-vis'
+          title: '拓扑图-vis',
+          icon: 'el-icon-menu'
         }
       }
       // {

@@ -4,10 +4,10 @@
     <div class="wrapper">
       <el-header class="headerHeight">
         <div class="main-header flex align-center">
-          <div class="logo flex align-center" style="min-width: 200px" @click="$router.push('/')">
+          <!-- <div class="logo flex align-center" style="min-width: 100px" @click="$router.push('/')">
             <div class="sysLogo flex-1 flex" />
-            <span class="home_btn" :class="$route.name === 'HOME' ? 'homeActive':''">首页</span>
-          </div>
+            <span class="home_btn" :class="$route.name === 'home' ? 'homeActive':''">首页</span>
+          </div> -->
           <div class="main-nav relative pl-20 pr-20">
             <span class="arrow-left absolute">
               <i
@@ -36,11 +36,11 @@
       </el-header>
       <el-main>
         <!-- <eNav /> -->
-        <div class="pl-10 pr-10 pb-10 pt-10 flex-1" :class="curRoute ==='HOME'?'home-box':'content-box'">
+        <div class="pl-10 pr-10 pb-10 pt-10 flex-1" :class="curRoute ==='home'?'home-box':'content-box'">
           <!-- <keep-alive include="Home"> -->
           <router-view />
           <!-- </keep-alive> -->
-          <div class="border-content" />
+          <!-- <div class="border-content" /> -->
         </div>
       </el-main>
     </div>
@@ -61,7 +61,7 @@
         around: true,
         tmpOffsetWidth: 0,
         editableTabsValue: this.getCurrentTab,
-        curRoute: 'HOME',
+        curRoute: 'home',
         showIot: true
       }
     },
@@ -197,19 +197,21 @@
 .main-header {
   height: 100%;
   .logo {
-    width: 20%;
     height: 100%;
     padding:0 2% 10px 15px;
     // background-image: url('../../../assets/img/scale/blue_header_left.png');
     background-size: 100% 100%;
+    background: red;
     cursor: pointer;
+    -webkit-clip-path: polygon(0% 0%, 90% 0, 100% 50%, 90% 100%, 0% 100%);
+    clip-path: polygon(0% 0%, 90% 0, 100% 50%, 90% 100%, 0% 100%);
     .sysLogo{
       background-size: 70%;
       height: 100%;
     }
   }
-  .home_btn,
-  .device_btn{
+  .home_btn {
+    color: #909399;
     width:133px;
     height:35px;
     line-height: 35px;
@@ -221,46 +223,7 @@
   }
   .home_btn {
     &.homeActive{
-    }
-  }
-  .device_btn {
-    margin-left: 9%;
-    cursor: pointer;
-  }
-  .userinfo {
-    width: 18%;
-    height: 100%;
-    float: right;
-    // background-image: url('../../../assets/img/scale/blue_header_right.png');
-    background-size: 100% 100%;
-    .el-avatar{
-    }
-    .el-menu--horizontal>.el-menu-item{
-      height: 100%;
-      padding:0;
-    }
-    .user-menu {
-      float: right;
-      margin-right: 20px;
-      width: auto;
-      .user-menu-item1 {
-        .el-submenu__title {
-          padding: 0;
-        }
-      }
-      .user-menu-item2 {
-        &:hover {
-          background: none;
-        }
-      }
-      .user-menu-item2.is-active {
-        border: none;
-      }
-    }
-    .sys-notice {
-      position: absolute;
-      left: 20px;
-      top: -8px;
+      color: #303133;
     }
   }
   .main-nav {

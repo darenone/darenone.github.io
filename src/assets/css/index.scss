@@ -524,7 +524,6 @@ a {
 .el-menu--horizontal > .el-submenu .el-submenu__title {
   height: 60px;
   line-height: 60px;
-  border-bottom-width: 4px !important;
 }
 .el-dropdown-menu__item,
 .el-menu-item {
@@ -535,7 +534,6 @@ a {
   height: 60px;
   line-height: 60px;
 }
-
 // 端口样式card
 .el-tabs--border-card{
   border:0;
