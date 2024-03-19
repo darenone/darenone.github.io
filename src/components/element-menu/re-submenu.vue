@@ -1,26 +1,26 @@
 <template>
   <!-- 不加这个div导致递归的时候报错 Maximum call stack size exceeded-->
-  <div>
+  <div class="flex">
     <el-submenu :index="index" popper-append-to-body:true class="h-100">
       <template slot="title">
         <i :class="[parent.icon, 'pr-10']" />
-        <span slot="title">{{ $t(parent.enName) }}</span>
+        <span slot="title">{{ $t(parent.title) }}</span>
       </template>
       <template v-for="(item) in parent.children">
         <el-menu-item
           v-if="!item.children"
-          :key="item.funcId"
+          :key="item.path"
           :index="item.path"
           :route="{ name: item.name }"
         >
           <i :class="[item.icon, 'pr-10']" />
-          <span slot="title">{{ $t(item.enName) }}</span>
+          <span slot="title">{{ $t(item.title) }}</span>
         </el-menu-item>
         <e-resubmenu
           v-else
-          :key="item.funcId"
+          :key="item.path"
           :parent="item"
-          :index="item.funcId"
+          :index="item.path"
         />
       </template>
     </el-submenu>

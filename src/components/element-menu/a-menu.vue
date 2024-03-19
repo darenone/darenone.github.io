@@ -11,7 +11,7 @@
       <template v-for="(item) in navList">
         <el-menu-item
           v-if="!item.children"
-          :key="item.funcId"
+          :key="item.path"
           :index="item.path"
           :route="{ name: item.name }"
         >
@@ -20,9 +20,9 @@
         </el-menu-item>
         <e-resubmenu
           v-else
-          :key="item.funcId"
+          :key="item.path"
           :parent="item"
-          :index="item.funcId"
+          :index="item.path"
         />
       </template>
     </el-menu>

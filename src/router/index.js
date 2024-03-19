@@ -4,10 +4,10 @@ import layout from '@/components/element-layout/layout-top.vue'
 
 Vue.use(VueRouter)
 /** 路由组件 */
-// const ROUTE_COMP = {
-//   template:
-//     '<div class="h-100"><transition name="move" mode="out-in"><router-view/></transition></div>'
-// }
+const ROUTE_COMP = {
+  template:
+    '<div class="h-100"><transition name="move" mode="out-in"><router-view/></transition></div>'
+}
 
 const routes = [
   // {
@@ -30,22 +30,33 @@ const routes = [
         }
       },
       {
-        path: '/antv-g6', // 拓扑展示（一级路由）
-        name: 'antvG6',
-        component: () => import('@/views/antv-g6/'),
+        path: '',
+        name: 'network',
+        component: ROUTE_COMP,
         meta: {
-          title: '关系图-G6',
+          title: '拓扑图',
           icon: 'el-icon-s-grid'
-        }
-      },
-      {
-        path: '/vis', // 拓扑展示（一级路由）
-        name: 'vis',
-        component: () => import('@/views/vis/'),
-        meta: {
-          title: '拓扑图-vis',
-          icon: 'el-icon-menu'
-        }
+        },
+        children: [
+          {
+            path: '/antv-g6', // 拓扑展示（一级路由）
+            name: 'antvG6',
+            component: () => import('@/views/antv-g6/'),
+            meta: {
+              title: '关系图-G6',
+              icon: 'el-icon-s-grid'
+            }
+          },
+          {
+            path: '/vis', // 拓扑展示（一级路由）
+            name: 'vis',
+            component: () => import('@/views/vis/'),
+            meta: {
+              title: '拓扑图-vis',
+              icon: 'el-icon-menu'
+            }
+          }
+        ]
       }
       // {
       //   path: '',

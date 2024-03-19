@@ -4,5 +4,7 @@ export default {
   },
   getters: {
     getMenu: state => state.menu
-  }
+  },
+  mutations: {},
+  actions: {}
 }

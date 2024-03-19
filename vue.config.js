@@ -6,6 +6,7 @@ const resolve = dir => {
 }
 module.exports = defineConfig({
   transpileDependencies: true,
+  runtimeCompiler: true,
   outputDir: 'docs',
   chainWebpack: config => {
     config.resolve.alias

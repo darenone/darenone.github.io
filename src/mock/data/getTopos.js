@@ -432,7 +432,7 @@ export default {
       'bizId': null,
       'segmentId': null,
       'cableId': '542420b2ca1f4f34a5a697afbc605d5e',
-      'cableLevel': 'BACKBONE',
+      'cableLevel': 'TRUNK',
       'groupId': null,
       'status': 'DAMAGE',
       'subInfo': {
@@ -507,7 +507,7 @@ export default {
       'bizId': null,
       'segmentId': null,
       'cableId': '65387ffd972a45d38b5a13ede6131334',
-      'cableLevel': 'BACKBONE',
+      'cableLevel': 'RELAY',
       'groupId': null,
       'status': 'IDLE',
       'subInfo': {

@@ -8,7 +8,7 @@
         {{ edit ? '取消编辑' : '编辑' }}
       </el-button>
     </div>
-    <div id="g6-demo1" class="h-100 flex-1" />
+    <div id="g6-demo2" class="h-100 flex-1" />
     <el-card v-show="eventData.mouseEvent" class="absolute" :style="{left: eventData.left + 'px', top: eventData.top + 'px'}">
       <div slot="header" class="clearfix">
         <span>名称：{{ eventData.label || '' }}</span>
@@ -56,12 +56,12 @@
             default: [
               {
                 type: 'drag-canvas',
-                enableOptimize: true,
+                enableOptimize: false, // 拖拽不隐藏连线和图标
                 allowDragOnItem: true
               },
               {
                 type: 'zoom-canvas',
-                enableOptimize: true
+                enableOptimize: false // 缩放不隐藏连线和图标
               },
               {
                 type: 'click-select',
@@ -176,7 +176,7 @@
           .catch(() => {})
       },
       init() {
-        const g6Container = document.getElementById('g6-demo1')
+        const g6Container = document.getElementById('g6-demo2')
         const g6Wrap = document.getElementsByClassName('antv-g6-wrap')[0]
         if (!g6Container) return
         console.log(g6Wrap.scrollHeight) // 离屏幕最上面高度
@@ -185,8 +185,7 @@
           container: g6Container,
           width: g6Wrap.scrollWidth,
           height: g6Wrap.scrollHeight,
-          ...this.graphCfg,
-          plugins: [this.addMiniMap(g6Wrap.scrollWidth, g6Wrap.scrollHeight)]
+          ...this.graphCfg
         })
         this.addEvent()
         this.renderTopo()
@@ -199,12 +198,24 @@
         nodes = this.nodes.map(i => {
           i.cableLevel && levels.push(i.cableLevel)
           return {
-            type: 'image',
+            type: 'circle',
             id: i.id.toString(),
             x: i.x || 0,
             y: i.y || 0,
-            img: i.image,
             label: i.label,
+            icon: {
+              show: true,
+              opacity: 1,
+              fontFamily: 'iconfont',
+              fill: i.icon.color,
+              text: i.icon.code,
+              fontSize: i.icon.size,
+              cursor: 'pointer'
+            },
+            style: {
+              fill: 'transparent',
+              stroke: 'transparent'
+            },
             labelCfg: {
               style: {
                 fill: i.font.color
@@ -342,27 +353,9 @@
           this.eventData = {}
         })
       },
-      addMiniMap(width, height) {
-        const scale = 0.2 // 拓扑图和鹰眼初始比例
-        // 添加鹰眼
-        return new G6.Minimap({
-          size: [width * scale, height * scale],
-          className: 'minimap',
-          hideEdge: true,
-          type: 'delegate'
-        })
-      },
       setEditable(val) {
         this.graph && this.graph.setMode(val ? 'edit' : 'default')
       }
     }
   }
 </script>
-<style lang="scss">
-.minimap {
-  position: fixed;
-  bottom: 15px;
-  right: 10px;
-  border: 1px solid #ccc;
-}
-</style>
