@@ -30,7 +30,7 @@ const routes = [
         }
       },
       {
-        path: '',
+        path: '/network',
         name: 'network',
         component: ROUTE_COMP,
         meta: {
@@ -39,7 +39,7 @@ const routes = [
         },
         children: [
           {
-            path: '/antv-g6', // 拓扑展示（一级路由）
+            path: 'antv-g6', // 拓扑展示（一级路由）
             name: 'antvG6',
             component: () => import('@/views/antv-g6/'),
             meta: {
@@ -48,9 +48,9 @@ const routes = [
             }
           },
           {
-            path: '/vis', // 拓扑展示（一级路由）
+            path: 'vis', // 拓扑展示（一级路由）
             name: 'vis',
-            component: () => import('@/views/vis/'),
+            component: () => import('@/views/vis-network/'),
             meta: {
               title: '拓扑图-vis',
               icon: 'el-icon-menu'

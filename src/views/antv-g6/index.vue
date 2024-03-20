@@ -11,11 +11,11 @@
           </div>
         </i-split>
       </el-tab-pane> -->
-      <el-tab-pane label="图片作为节点" name="demo1" class="h-100">
-        <G6Demo1Vue />
+      <el-tab-pane label="图片作为节点" name="G6Demo1Vue" class="h-100">
+        <component :is="activeName === 'G6Demo1Vue' ? 'G6Demo1Vue' : ''" />
       </el-tab-pane>
-      <el-tab-pane label="图标作为节点" name="demo2" class="h-100">
-        <G6Demo2Vue />
+      <el-tab-pane label="图标作为节点" name="G6Demo2Vue" class="h-100">
+        <component :is="activeName === 'G6Demo2Vue' ? 'G6Demo2Vue' : ''" />
       </el-tab-pane>
     </el-tabs>
   </section>
@@ -23,7 +23,6 @@
 <script>
   import G6Demo1Vue from './components/G6-demo1.vue'
   import G6Demo2Vue from './components/G6-demo2.vue'
-  // import Introduction from './components/Introduction.vue'
   export default {
     components: {
       G6Demo1Vue,
@@ -32,7 +31,7 @@
     data() {
       return {
         split1: 0.5,
-        activeName: 'demo1'
+        activeName: 'G6Demo1Vue'
       }
     },
     methods: {

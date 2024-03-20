@@ -141,6 +141,9 @@
     mounted() {
       this.getTopos()
     },
+    beforeDestroy() {
+      this.destroy()
+    },
     methods: {
       getTopos() {
         topoPositionApi
@@ -354,6 +357,14 @@
       },
       setEditable(val) {
         this.graph && this.graph.setMode(val ? 'edit' : 'default')
+      },
+      destroy() {
+        this.graph.clear() // 清空画布内容
+        this.graph.destroy() // 销毁画布
+        this.graph.off() // 解除所有元素的监听事件
+        this.graph = null
+        this.nodes = []
+        this.edges = []
       }
     }
   }
