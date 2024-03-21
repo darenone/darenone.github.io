@@ -213,6 +213,7 @@
               fill: i.icon.color,
               text: i.icon.code,
               fontSize: i.icon.size,
+              stroke: 'transparent',
               cursor: 'pointer'
             },
             style: {

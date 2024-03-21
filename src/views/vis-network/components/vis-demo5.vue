@@ -1,4 +1,4 @@
-// 以图标作为节点
+// 设置连线的弯曲度
 <template>
   <div class="vis-wrap h-100 flex-column relative">
     <div class="flex justify-end">
@@ -105,16 +105,31 @@
         // 渲染拓扑图
         this.destroy()
         if (!document.getElementById(this.id)) return
-        console.log(this.nodes)
-        this.nodes.forEach(i => {
-          i.shape = 'icon'
-        })
         this.myNode = new vis.DataSet(this.nodes)
         this.myEdge = new vis.DataSet(this.edges)
         this.myNetwork = new vis.Network(
           document.getElementById(this.id),
           { nodes: this.myNode, edges: this.myEdge },
           visCfg)
+        this.setEdgeSmooth() // 设置连线的弯曲度
+      },
+      // 设置连线的样式
+      setEdgeSmooth() {
+        this.edges.forEach(i => {
+          const edges = this.edges.filter(
+            j =>
+              (j.fromNodeId === i.fromNodeId && j.toNodeId === i.toNodeId) ||
+              (j.fromNodeId === i.toNodeId && j.toNodeId === i.fromNodeId)
+          )
+          if (edges.length === 1) {
+            this.myEdge.update({
+              id: edges[0].id,
+              smooth: {
+                enabled: false
+              }
+            })
+          }
+        })
       },
       setEditable(val) {
         this.myNetwork.setOptions({

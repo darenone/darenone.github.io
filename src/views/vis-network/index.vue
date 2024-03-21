@@ -13,6 +13,15 @@
       <el-tab-pane label="添加交互事件" name="VisDemo4Vue" class="h-100">
         <component :is="activeName === 'VisDemo4Vue' ? 'VisDemo4Vue' : ''" />
       </el-tab-pane>
+      <el-tab-pane label="设置连线只有一条时不弯曲" name="VisDemo5Vue" class="h-100">
+        <component :is="activeName === 'VisDemo5Vue' ? 'VisDemo5Vue' : ''" />
+      </el-tab-pane>
+      <el-tab-pane label="添加分组" name="VisDemo6Vue" class="h-100">
+        <component :is="activeName === 'VisDemo6Vue' ? 'VisDemo6Vue' : ''" />
+      </el-tab-pane>
+      <el-tab-pane label="更新节点和连线样式" name="VisDemo7Vue" class="h-100">
+        <component :is="activeName === 'VisDemo7Vue' ? 'VisDemo7Vue' : ''" />
+      </el-tab-pane>
     </el-tabs>
   </section>
 </template>
@@ -21,12 +30,18 @@
   import VisDemo2Vue from './components/vis-demo2.vue'
   import VisDemo3Vue from './components/vis-demo3.vue'
   import VisDemo4Vue from './components/vis-demo4.vue'
+  import VisDemo5Vue from './components/vis-demo5.vue'
+  import VisDemo6Vue from './components/vis-demo6.vue'
+  import VisDemo7Vue from './components/vis-demo7.vue'
   export default {
     components: {
       VisDemo1Vue,
       VisDemo2Vue,
       VisDemo3Vue,
-      VisDemo4Vue
+      VisDemo4Vue,
+      VisDemo5Vue,
+      VisDemo6Vue,
+      VisDemo7Vue
     },
     data() {
       return {

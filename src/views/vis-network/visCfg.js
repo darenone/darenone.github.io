@@ -9,7 +9,8 @@ export default {
       size: 0
     },
     color: {
-      color: '#409EFF',
+      color: 'red',
+      // highlight: 'orange',
       opacity: 0.5
     }
   },
@@ -31,7 +32,7 @@ export default {
     randomSeed: 1 // 配置每次生成的节点位置都一样，参数为数字1、2等
   },
   physics: {
-    // enabled: true, // 默认是true，设置为false后，节点将不会自动改变，拖动谁谁动。不影响其他的节点
+    enabled: true, // 默认是true，设置为false后，节点将不会自动改变，拖动谁谁动。不影响其他的节点
     barnesHut: {
       // theta: 0.5,
       gravitationalConstant: -2000,

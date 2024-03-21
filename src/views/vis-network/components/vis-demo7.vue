@@ -1,4 +1,4 @@
-// 以图标作为节点
+// 以图片作为节点
 <template>
   <div class="vis-wrap h-100 flex-column relative">
     <div class="flex justify-end">
@@ -8,6 +8,9 @@
       <el-button type="primary" class="ml-10" @click="setEditable(edit = !edit)">
         {{ edit ? '取消编辑' : '编辑' }}
       </el-button>
+      <el-button type="primary" class="ml-10" @click="focus()">
+        聚焦某个节点
+      </el-button>
     </div>
     <div :id="id" class="vis-container flex1" :style="networkStyle" />
   </div>
@@ -15,7 +18,7 @@
 <script>
   import vis from 'vis'
   import visCfg from '../visCfg.js'
-  import { formatEdges, formatNodes } from '@/views/antv-g6/format.js'
+  import { formatEdges, formatNodes, colorData, categoryNode } from '@/views/antv-g6/format.js'
   import topoPositionApi from '@/api/TopoPositionApi'
   export default {
     props: {
@@ -34,7 +37,11 @@
         myEdge: null, // 拓扑图边实例
         networkStyle: {},
         network_offset_left: 0, // 画布距离屏幕左侧的距离
-        network_offset_top: 0 // 画布距离屏幕顶部的距离
+        network_offset_top: 0, // 画布距离屏幕顶部的距离
+        staticsItem: {
+          width: 0,
+          height: 200
+        }
       }
     },
     computed: {
@@ -105,16 +112,73 @@
         // 渲染拓扑图
         this.destroy()
         if (!document.getElementById(this.id)) return
-        console.log(this.nodes)
-        this.nodes.forEach(i => {
-          i.shape = 'icon'
-        })
         this.myNode = new vis.DataSet(this.nodes)
-        this.myEdge = new vis.DataSet(this.edges)
+        this.myEdge = new vis.DataSet(this.edges.map(i => i))
         this.myNetwork = new vis.Network(
           document.getElementById(this.id),
           { nodes: this.myNode, edges: this.myEdge },
           visCfg)
+        this.addEvent()
+      },
+      addEvent() {
+        // 选中节点
+        this.myNetwork.on('selectNode', properties => {
+          const currentNode = this.nodes.find(i => i.id === properties.nodes[0]) || {}
+          console.log(currentNode)
+          this.myNode.update([
+            {
+              id: currentNode.id,
+              font: { color: colorData.highLight },
+              icon: { color: colorData.highLight },
+              image: categoryNode(currentNode, 'highLight')
+            }
+          ])
+        })
+        // 取消选中节点
+        this.myNetwork.on('deselectNode', properties => {
+          if (properties.previousSelection.nodes[0]) {
+            const currentNode = this.nodes.find(i => i.id === properties.previousSelection.nodes[0]) || {}
+            this.myNode.update([
+              currentNode
+            ])
+          }
+        })
+        // 选中连接线
+        this.myNetwork.on('selectEdge', properties => {
+          const currentEdge = this.edges.find(i => i.id === properties.edges[0]) || {}
+          console.log('被选中的连接线', currentEdge.label)
+          this.myEdge.update([
+            {
+
+              id: currentEdge.id,
+              font: {
+                size: 20,
+                color: colorData.highLight
+              },
+              width: 4
+            }
+          ])
+        })
+        // 取消选中连接线
+        this.myNetwork.on('deselectEdge', properties => {
+          console.log(properties.previousSelection.edges)
+          if (properties.previousSelection.edges[0]) {
+            const currentEdge = this.edges.find(i => i.id === properties.previousSelection.edges[0]) || {}
+            this.myEdge.update([
+              currentEdge
+            ])
+          }
+        })
+      },
+      focus() {
+        const location = this.myNetwork.getPositions(10)['10'] // 找到节点的位置
+        this.myNetwork.moveTo({
+          position: { x: location.x, y: location.y },
+          animation: {
+            duration: 1500,
+            easingFunction: 'linear'
+          }
+        })
       },
       setEditable(val) {
         this.myNetwork.setOptions({
@@ -122,6 +186,25 @@
             dragNodes: val
           }
         })
+      },
+      fitView(data, times = 0) {
+        if (this.nodes.length === 0 && times < 4) {
+          setTimeout(() => {
+            this.fitView(data, times++)
+          }, 500)
+          return
+        }
+        const fitNodes = this.nodes.filter(i => data.includes(i.nodeId)).map(i => i.id)
+        setTimeout(() => {
+          if (!this.myNetwork) return
+          this.myNetwork.fit({ nodes: fitNodes })
+          const scale = this.myNetwork.getScale()
+          !this.fullScreen &&
+            this.myNetwork.moveTo({
+              offset: { x: 0, y: 0 - this.staticsItem.height / 2 - 20 },
+              scale: scale * 0.8
+            })
+        }, 500)
       },
       destroy() {
         if (this.myNetwork) {

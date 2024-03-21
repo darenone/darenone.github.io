@@ -128,13 +128,7 @@
         this.myNetwork = new vis.Network(
           document.getElementById(this.id),
           { nodes: this.myNode, edges: this.myEdge },
-          {
-            ...visCfg,
-            nodes: {
-              ...visCfg.nodes,
-              shape: 'icon' // 将此参数设置为icon，并且nodes里配置每个节点的iconfont，即可显示图标
-            }
-          })
+          visCfg)
         this.addEagleEye()
       },
       addEagleEye() {
@@ -144,13 +138,7 @@
           this.eagelEyeVis = new vis.Network(
             this.$refs[`${this.id}EagelEyeVis`],
             { nodes: this.myEagelNode, edges: this.myEagelEdge },
-            {
-            ...visCfg,
-            nodes: {
-              ...visCfg.nodes,
-              shape: 'icon' // 将此参数设置为icon，并且nodes里配置每个节点的iconfont，即可显示图标
-            }
-            })
+            visCfg)
           this.eagelEyeVis.setOptions({
             interaction: {
               dragNodes: false
@@ -158,6 +146,18 @@
           })
           this.handleDrag() // 拓扑和鹰眼拖拽时互动
           this.handleZoom() // 拓扑和鹰眼缩放联动
+          // 校准
+          setTimeout(() => {
+            const { x, y } = this.myNetwork.getViewPosition()
+            this.eagelEyeVis &&
+              this.eagelEyeVis.moveTo({
+                position: {
+                  x: x,
+                  y: y
+                },
+                scale: this.myNetwork.getScale() * this.scale
+              })
+          })
         }
       },
       handleDrag() {
@@ -259,16 +259,5 @@
       border: 1px solid #ccc;
       background: rgba(153, 153, 153, 0.3);
     }
-    .icon-switch {
-      position: absolute;
-      right: 20px;
-      top: 80px;
-    }
-  }
-  .room-box {
-    position: absolute;
-    pointer-events: none;
-    border: 2px dashed #ccc;
-    color: #ccc;
   }
 </style>

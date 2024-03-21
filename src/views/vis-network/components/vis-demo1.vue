@@ -34,7 +34,11 @@
         myEdge: null, // 拓扑图边实例
         networkStyle: {},
         network_offset_left: 0, // 画布距离屏幕左侧的距离
-        network_offset_top: 0 // 画布距离屏幕顶部的距离
+        network_offset_top: 0, // 画布距离屏幕顶部的距离
+        staticsItem: {
+          width: 0,
+          height: 200
+        }
       }
     },
     computed: {
@@ -111,6 +115,7 @@
           document.getElementById(this.id),
           { nodes: this.myNode, edges: this.myEdge },
           visCfg)
+        this.fitView(['20230926165227457259064', '20231031141806664421781'])
       },
       setEditable(val) {
         this.myNetwork.setOptions({
@@ -118,6 +123,25 @@
             dragNodes: val
           }
         })
+      },
+      fitView(data, times = 0) {
+        if (this.nodes.length === 0 && times < 4) {
+          setTimeout(() => {
+            this.fitView(data, times++)
+          }, 500)
+          return
+        }
+        const fitNodes = this.nodes.filter(i => data.includes(i.nodeId)).map(i => i.id)
+        setTimeout(() => {
+          if (!this.myNetwork) return
+          this.myNetwork.fit({ nodes: fitNodes })
+          const scale = this.myNetwork.getScale()
+          !this.fullScreen &&
+            this.myNetwork.moveTo({
+              offset: { x: 0, y: 0 - this.staticsItem.height / 2 - 20 },
+              scale: scale * 0.8
+            })
+        }, 500)
       },
       destroy() {
         if (this.myNetwork) {

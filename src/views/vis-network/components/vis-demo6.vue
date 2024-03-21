@@ -1,4 +1,4 @@
-// 以图标作为节点
+// 以图片作为节点
 <template>
   <div class="vis-wrap h-100 flex-column relative">
     <div class="flex justify-end">
@@ -10,6 +10,20 @@
       </el-button>
     </div>
     <div :id="id" class="vis-container flex1" :style="networkStyle" />
+    <div
+      v-for="combo in comboData"
+      :id="combo.comboId"
+      :key="combo.comboId"
+      :style="{
+        top: combo.y,
+        left: combo.x,
+        width: combo.width,
+        height: combo.height
+      }"
+      class="combo-box text-center"
+    >
+      <span class="font-small">{{ combo.comboName }}</span>
+    </div>
   </div>
 </template>
 <script>
@@ -34,7 +48,14 @@
         myEdge: null, // 拓扑图边实例
         networkStyle: {},
         network_offset_left: 0, // 画布距离屏幕左侧的距离
-        network_offset_top: 0 // 画布距离屏幕顶部的距离
+        network_offset_top: 0, // 画布距离屏幕顶部的距离
+        staticsItem: {
+          width: 0,
+          height: 200
+        },
+        comboData: [],
+        comboList: [],
+        comboScale: 1
       }
     },
     computed: {
@@ -105,16 +126,97 @@
         // 渲染拓扑图
         this.destroy()
         if (!document.getElementById(this.id)) return
-        console.log(this.nodes)
-        this.nodes.forEach(i => {
-          i.shape = 'icon'
-        })
         this.myNode = new vis.DataSet(this.nodes)
         this.myEdge = new vis.DataSet(this.edges)
         this.myNetwork = new vis.Network(
           document.getElementById(this.id),
           { nodes: this.myNode, edges: this.myEdge },
           visCfg)
+        this.getcomboList()
+      },
+      getcomboList() {
+        // 划分机房数据
+        const comboList = []
+        console.log(this.nodes)
+        this.nodes.forEach((ele, index) => {
+          if (ele.cableLevel) {
+            const curcombo = comboList.find(j => j.comboId === ele.cableLevel)
+            if (curcombo) {
+              curcombo.nodes.push(ele)
+            } else {
+              comboList.push({
+                comboId: ele.cableLevel,
+                comboName: ele.cableLevel,
+                nodes: [ele]
+              })
+            }
+          }
+        })
+        this.comboList = comboList
+        const _this = this
+        setTimeout(() => {
+          _this.setcombo()
+        }, 300)
+        this.myNetwork.on('dragEnd', properties => {
+          this.myNetwork.unselectAll()
+        })
+        this.myNetwork.on('dragging', properties => {
+          // 拖拽某个节点时，联动
+          if (properties.nodes && properties.nodes.length) {
+            // console.log('properties', properties)
+            // 更新机房内节点位置
+            const { x, y } = properties.pointer.canvas
+            this.comboList.forEach(i => {
+              i.nodes.forEach(j => {
+                if (j.id === properties.nodes[0]) {
+                  j.x = x
+                  j.y = y
+                }
+              })
+            })
+          }
+          this.setcombo()
+        })
+        this.myNetwork.on('zoom', parms => {
+          // console.log('parms', parms)
+          this.comboScale = parms.scale
+          this.setcombo()
+          if (this.$parent.clickProp) {
+            this.$emit('dragStart')
+          }
+        })
+      },
+      // 添加机房框
+      setcombo() {
+        const scale = this.comboScale < 0.8 ? 0.8 : this.comboScale
+        this.comboData = this.comboList.map(i => {
+          const xArray = []
+          const yArray = []
+          i.nodes.forEach(j => {
+            if (!j.x || !j.y) {
+              const positions = this.myNetwork.getPositions(j.id)
+              j.x = positions[j.id].x
+              j.y = positions[j.id].y
+            }
+            const domLocation = this.myNetwork.canvasToDOM({ x: j.x, y: j.y })
+            xArray.push(domLocation.x)
+            yArray.push(domLocation.y)
+          })
+          // 通过机房内最小x、y的值来计算机房盒子大小和定位
+          const x1 = Math.min(...xArray)
+          const x2 = Math.max(...xArray)
+          const y1 = Math.min(...yArray)
+          const y2 = Math.max(...yArray)
+          return {
+            comboId: i.comboId,
+            comboName: i.comboName,
+            width: (x2 - x1 + 120) * scale + 'px',
+            height: (y2 - y1 + 100) * scale + 'px',
+            x: x1 - 40 * scale + 'px',
+            y: y1 - 50 * scale + 'px'
+          }
+        })
+        // console.log('comboData', this.comboData)
       },
       setEditable(val) {
         this.myNetwork.setOptions({
@@ -134,3 +236,12 @@
     }
   }
 </script>
+<style lang="scss" scoped>
+.combo-box {
+    position: absolute;
+    pointer-events: none;
+    border: 2px dashed #ccc;
+    color: #ccc;
+    background: rgba(153, 153, 153, 0.3);
+  }
+</style>

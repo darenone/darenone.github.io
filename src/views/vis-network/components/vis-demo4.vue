@@ -10,6 +10,14 @@
       </el-button>
     </div>
     <div :id="id" class="vis-container flex1" :style="networkStyle" />
+    <el-card v-show="eventData.mouseEvent" class="absolute" :style="{left: eventData.left - 120 + 'px', top: eventData.top + 'px'}">
+      <div slot="header" class="clearfix">
+        <span>名称：{{ eventData.label || '' }}</span>
+      </div>
+      <div class="text item">
+        编码：{{ eventData.nodeId || eventData.cableId }}
+      </div>
+    </el-card>
   </div>
 </template>
 <script>
@@ -34,7 +42,8 @@
         myEdge: null, // 拓扑图边实例
         networkStyle: {},
         network_offset_left: 0, // 画布距离屏幕左侧的距离
-        network_offset_top: 0 // 画布距离屏幕顶部的距离
+        network_offset_top: 0, // 画布距离屏幕顶部的距离
+        eventData: {}
       }
     },
     computed: {
@@ -95,7 +104,7 @@
           width: myNetworkWrap.offsetWidth + 'px',
           height: myNetworkWrap.offsetHeight + 'px'
         }
-        this.network_offset_top = myNetworkWrap.offsetTop - 80 // Y偏移量（80是拓扑容器距离浏览器顶部的距离）
+        this.network_offset_top = myNetworkWrap.offsetTop + 80 // Y偏移量（80是拓扑容器距离浏览器顶部的距离）
         // 必须要加延时函数，等待鹰眼的宽高设置完以后再去渲染拓扑图，不然两个拓扑图会存在位置偏差
         setTimeout(() => {
           this.renderTopo()
@@ -111,11 +120,110 @@
           document.getElementById(this.id),
           { nodes: this.myNode, edges: this.myEdge },
           visCfg)
+        this.addEvent() // 添加节点和连线的交互事件
       },
       setEditable(val) {
         this.myNetwork.setOptions({
           interaction: {
             dragNodes: val
+          }
+        })
+      },
+      addEvent() {
+        this.edgesHover() // 连接线hover
+        this.edgesClick() // 连接线click
+        this.nodesClick() // 节点click
+        this.nodesHover() // 节点hover
+      },
+      edgesHover() {
+        this.myNetwork.on('hoverEdge', properties => {
+          this.clientX = properties.event.clientX
+          this.clientY = properties.event.clientY
+          this.eventData = {
+            mouseEvent: 'fiberHover',
+            cableId: properties.edge,
+            left: properties.event.clientX,
+            top: properties.event.clientY - this.network_offset_top
+          }
+        })
+        this.myNetwork.on('blurEdge', properties => {
+          this.eventData = {
+            mouseEvent: '',
+            left: 0,
+            top: 0
+          }
+        })
+      },
+      edgesClick() {
+        // 选中连接线
+        this.myNetwork.on('selectEdge', properties => {
+          this.edges.forEach(ele => {
+            if (ele.id === properties.edges[0]) {
+              this.eventData = {
+                cableId: properties.edges[0],
+                mouseEvent: 'fiberClick',
+                label: ele.label,
+                left: properties.event.center.x - 10,
+                top: properties.event.center.y - this.network_offset_top - 10,
+                fromNodeId: ele.fromNodeId,
+                toNodeId: ele.toNodeId
+              }
+            }
+          })
+        })
+        // 取消选中连接线
+        this.myNetwork.on('deselectEdge', properties => {
+          if (!properties.edges.length) {
+            // 单纯取消当前选中的连线，而不是从一个选中连线切换到另一个选中连线
+            this.eventData = {
+              id: properties.previousSelection.edges[0],
+              mouseEvent: 'fiberClick',
+              left: 0,
+              top: 0
+            }
+          }
+        })
+      },
+      nodesHover() {
+        this.myNetwork.on('hoverNode', properties => {
+          const currentNode = this.nodes.find(i => i.id === properties.node) || {}
+          this.eventData = {
+            ...currentNode,
+            mouseEvent: 'stationHover',
+            left: properties.event.clientX, // 当前鼠标在画布中的位置(校准后)
+            top: properties.event.clientY - this.network_offset_top
+          }
+        })
+        this.myNetwork.on('blurNode', properties => {
+          this.eventData = {
+            mouseEvent: '',
+            left: 0,
+            top: 0
+          }
+        })
+      },
+      nodesClick() {
+        // 选中节点
+        this.myNetwork.on('selectNode', properties => {
+          const currentNode = this.nodes.find(i => i.id === properties.nodes[0]) || {}
+          this.eventData = {
+            ...currentNode,
+            mouseEvent: 'stationClick',
+            left: properties.event.clientX, // 当前鼠标在画布中的位置(校准后)
+            top: properties.event.clientY - this.network_offset_top
+          }
+        })
+        // 取消选中节点
+        this.myNetwork.on('deselectNode', properties => {
+          if (!properties.nodes.length) {
+            // 单纯取消当前选中的节点，而不是从一个选中节点切换到另一个选中节点
+            this.$emit('selectNode', {
+              id: properties.previousSelection.nodes[0],
+              mouseStatus: 'CANCEL',
+              mouseEvent: 'stationClick',
+              left: 0,
+              top: 0
+            })
           }
         })
       },
